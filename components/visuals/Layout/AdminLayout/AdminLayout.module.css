@@ -1,0 +1,7 @@
+.admin {
+  display: flex;
+  gap: 1rem;
+}
+.admin_body {
+  flex: 5;
+}

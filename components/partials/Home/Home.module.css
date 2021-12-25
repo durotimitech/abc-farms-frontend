@@ -1,0 +1,15 @@
+.header {
+  background-color: var(--background-color);
+  border-radius: 30px;
+  text-align: center;
+  margin: 1rem 0;
+  padding: 1rem 0;
+}
+.category {
+  background-color: var(--light-bg-color);
+  color: var(--primary-color);
+  border-radius: 20px;
+  padding: 0.4rem;
+  text-align: center;
+  width: 7%;
+}

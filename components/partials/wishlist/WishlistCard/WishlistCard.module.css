@@ -1,0 +1,22 @@
+.wishlist_card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .wishlist_product_title {
+    font-weight: bold;
+  }
+  .wishlist_product_subtotal {
+    color: var(--primary-color);
+  }
+  
+  .wishlist_product_qty {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  
+  .increase_qty {
+    color: var(--primary-color);
+  }
+  

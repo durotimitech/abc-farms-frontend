@@ -1,0 +1,29 @@
+.cart_card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.product_info {
+  display: flex;
+}
+.title_wishlist {
+  margin-left: 1rem;
+}
+.cart_product_title {
+  font-weight: bold;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.increase_qty {
+  color: var(--primary-color);
+}
+
+.cart_product_subtotal {
+  color: var(--primary-color);
+}
+
+

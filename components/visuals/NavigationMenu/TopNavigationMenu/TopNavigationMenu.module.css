@@ -1,0 +1,18 @@
+.nav_menu {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 0;
+}
+
+.links {
+  display: flex;
+}
+
+.nav_menu li {
+  list-style-type: none;
+  margin-left: 1rem;
+}
+
+.dropdown_item {
+  margin-right: 0.5rem;
+}

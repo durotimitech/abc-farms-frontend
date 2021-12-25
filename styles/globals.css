@@ -1,0 +1,83 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --background-color: #e8f3e9;
+  --primary-color: #53b176;
+  --light-bg-color: #c6fcda;
+}
+
+body {
+  font-family: "Roboto Condensed", sans-serif;
+}
+
+.container {
+  max-width: 350px;
+  margin: auto;
+}
+
+.btn {
+  color: white;
+  background-color: var(--primary-color);
+}
+.btn:hover {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+.btn_light:hover {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--primary-color);
+}
+
+.green {
+  color: var(--primary-color);
+}
+
+.red {
+  color: rgb(214, 104, 104);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+td,
+th {
+  border-bottom: 1px solid #dddddd;
+  border-right: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+/* Icons */
+.fa_2x {
+  font-size: 1.3rem;
+}
+
+@media only screen and (min-width: 768px) {
+  .container {
+    max-width: 600px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .container {
+    max-width: 1000px;
+  }
+}

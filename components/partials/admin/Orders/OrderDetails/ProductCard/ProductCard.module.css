@@ -1,0 +1,7 @@
+.productTitle {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.price {
+  color: var(--primary-color);
+}

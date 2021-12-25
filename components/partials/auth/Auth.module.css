@@ -1,0 +1,27 @@
+.auth {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.auth .content {
+  width: 100%;
+}
+.auth .auth_header {
+  margin-bottom: 1rem;
+}
+
+.grey_text {
+  opacity: 0.5;
+}
+
+@media only screen and (min-width: 768px) {
+  .auth .content {
+    width: 70%;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .auth .content {
+    width: 50%;
+  }
+}

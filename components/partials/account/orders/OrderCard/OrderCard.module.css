@@ -1,0 +1,12 @@
+.order_card {
+  display: flex;
+  flex-direction: column;
+}
+.order_info {
+  display: flex;
+  flex-direction: column;
+}
+.product_title {
+  font-weight: bold;
+  font-size: 1.2rem;
+}

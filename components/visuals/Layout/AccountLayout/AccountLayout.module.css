@@ -1,0 +1,8 @@
+.account {
+    display: flex;
+    gap: 1rem;
+  }
+  .account_body {
+    flex: 5;
+  }
+  

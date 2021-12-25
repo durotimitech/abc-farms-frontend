@@ -1,0 +1,11 @@
+@media only screen and (min-width: 768px) {
+  .body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .content {
+    align-self: center;
+    width: 500px;
+  }
+}
