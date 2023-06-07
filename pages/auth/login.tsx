@@ -1,11 +1,11 @@
 import React from "react";
 import Login from "../../components/partials/auth/Login";
-import { useSelector } from "react-redux";
+import { RootStateOrAny, useSelector } from "react-redux";
 import Spinner from "../../components/visuals/Spin/Spin";
 import MyBreadcrumb from "../../components/visuals/Breadcrumb/MyBreadcrumb";
 
 const LoginPage = () => {
-  let loading = useSelector((state) => state.auth.loading);
+  let loading = useSelector((state: RootStateOrAny) => state.auth.loading);
   const breadcrumbs = ["Home", "Login"];
 
   return (

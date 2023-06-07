@@ -15,9 +15,10 @@ export const login = (data: Login) => async (dispatch: Dispatch<Action>) => {
     dispatch({ type: actionTypes.LOGIN_REQUEST, });
 
     let res = await AuthRepository.login(data);
+    console.log(res.data)
 
-    if (res.message === "success" && res.data.token) {
-      if (res.data.isEmailVerified) {
+    if (res.statusCode === 200) {
+      if (res.data.emailVerified) {
         openNotification({ type: "success", message: "Login Successful!" });
         localStorage.setItem(localStorageVars.TOKEN, res.data.token);
         router.push("/");
@@ -27,16 +28,11 @@ export const login = (data: Login) => async (dispatch: Dispatch<Action>) => {
             payload: {
               isLoggedIn: true,
               token: res.data.token,
-              accessLevel: res.data.accessLevel,
               firstName: res.data.firstName,
-              lastName: res.data.lastName,
-              phone: res.data.phone,
-              email: res.data.email,
-              userId: res.data.userId,
             }
           }
         );
-        dispatch(getCart());
+        dispatch(getCart() as any);
       } else {
         _error("Please verify your email!", "verifyEmail");
         router.push(links.VERIFYEMAIL);

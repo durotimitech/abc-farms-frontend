@@ -1,41 +1,41 @@
 import actionTypes from "../action-types/auth";
 
 export interface State {
-    isLoggedIn: boolean,
-    loading: boolean,
+  isLoggedIn: boolean;
+  loading: boolean;
 }
 
 export interface Login {
-    email: string,
-    password: string
+  email: string;
+  password: string;
 }
 
 export interface AuthData {
-    isLoggedIn: boolean,
-    token: string,
-    accessLevel: number[],
-    firstName: string,
-    lastName: string,
-    phone: string,
-    email: string,
-    userId: number,
+  isLoggedIn: boolean;
+  token: string;
+  firstName: string;
 }
 
 interface LoginRequestAction {
-    type: actionTypes.LOGIN_REQUEST,
+  type: actionTypes.LOGIN_REQUEST;
 }
 interface LoginSuccessAction {
-    type: actionTypes.LOGIN_SUCCESS,
-    payload: AuthData
+  type: actionTypes.LOGIN_SUCCESS;
+  payload: AuthData;
 }
 interface LoginErrorAction {
-    type: actionTypes.LOGIN_ERROR,
+  type: actionTypes.LOGIN_ERROR;
 }
 interface LogoutRequestAction {
-    type: actionTypes.LOGOUT_REQUEST,
+  type: actionTypes.LOGOUT_REQUEST;
 }
 interface LogoutSuccessAction {
-    type: actionTypes.LOGOUT_SUCCESS,
+  type: actionTypes.LOGOUT_SUCCESS;
 }
 
-export type Action = LoginRequestAction | LoginSuccessAction | LoginErrorAction | LogoutRequestAction | LogoutSuccessAction
+export type Action =
+  | LoginRequestAction
+  | LoginSuccessAction
+  | LoginErrorAction
+  | LogoutRequestAction
+  | LogoutSuccessAction;

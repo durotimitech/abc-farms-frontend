@@ -21,6 +21,9 @@ export const _error = (error, from) => {
       case "verifyEmail":
         verifyEmailError(error);
         break;
+      case "resendVerification":
+        resendVerificationError(error);
+        break;
       case "changePassword":
         changePasswordError(error);
         break;
@@ -108,6 +111,19 @@ const signupError = (e) => {
 };
 
 const verifyEmailError = (e) => {
+  let message;
+  switch (e) {
+    case "Request failed with status code 400":
+      message = "The verification code is not valid!";
+      break;
+    default:
+      message = e;
+      break;
+  }
+  openNotification({ type: "error", message });
+};
+
+const resendVerificationError = (e) => {
   let message;
   switch (e) {
     case "Request failed with status code 400":

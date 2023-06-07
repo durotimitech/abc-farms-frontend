@@ -7,7 +7,7 @@ class AuthRepository {
     console.log("Login API called...");
     try {
       let payload = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_USERS}/login`,
+        `${process.env.NEXT_PUBLIC_API}/users/login`,
         data,
         {
           timeout: 8000,
@@ -23,9 +23,13 @@ class AuthRepository {
   async createAccount(data) {
     console.log("createAccount API called...");
     try {
-      let payload = await axios.post(process.env.NEXT_PUBLIC_API_USERS, data, {
-        timeout: 8000,
-      });
+      let payload = await axios.post(
+        `${process.env.NEXT_PUBLIC_API}/users/register`,
+        data,
+        {
+          timeout: 8000,
+        }
+      );
 
       return payload.data;
     } catch (e) {
@@ -54,9 +58,9 @@ class AuthRepository {
   async resendVerificationCode(data) {
     console.log("resendVerificationCode API called...");
     try {
-      let payload = await axios.patch(
-        `${process.env.NEXT_PUBLIC_API_USERS}/resend-verify-email`,
-        [{ propName: "email", value: data.email }],
+      let payload = await axios.post(
+        `${process.env.NEXT_PUBLIC_API}/users/resend-verification-email`,
+        data,
         {
           timeout: 8000,
         }

@@ -2,13 +2,13 @@ import React from "react";
 import Link from "next/link";
 import classes from "./Auth.module.css";
 import { Form, Input, Button, Alert, Card } from "antd";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
 import { login } from "../../../store/actions/auth";
 import { links } from "../../../utilities/constants";
 
 const Login = () => {
   const dispatch = useDispatch();
-  let error = useSelector((state) => state.auth.error);
+  let error = useSelector((state: RootStateOrAny) => state.auth.error);
 
   const [form] = Form.useForm();
 

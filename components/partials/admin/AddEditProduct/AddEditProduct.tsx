@@ -6,14 +6,19 @@ import ProductImages from "./ProductImages/ProductImages";
 import classes from "./AddEditProduct.module.css";
 import { localStorageVars } from "../../../../utilities/constants";
 
-interface IProps{
-products:any[],
-product:any,
-action:string,
-heading:string,
+interface IProps {
+  products: any[];
+  product: any;
+  action: string;
+  heading: string;
 }
 
-const AdminAddEditProduct:React.FC<IProps> = ({ products, action, product, heading }) => {
+const AdminAddEditProduct: React.FC<IProps> = ({
+  products,
+  action,
+  product,
+  heading,
+}) => {
   const dispatch = useDispatch();
   const [productData, setProductData] = useState({
     productTitle: "",

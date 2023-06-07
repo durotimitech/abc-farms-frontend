@@ -7,21 +7,22 @@ import Spinner from "../../visuals/Spin/Spin";
 import AuthRepository from "../../../repositories/AuthRepository";
 import openNotification from "../../visuals/Notification";
 import { localStorageVars } from "../../../utilities/constants";
+import { links } from "../../../utilities/constants";
 
-interface IState{
-  userInfo:{
-    firstName:string,
-    lastName:string,
-    email:string,
-    password:string,
-    confirmPassword:string,
-    phone:string,
-  }
+interface IState {
+  userInfo: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
+    phone: string;
+  };
 }
 
 const Signup = () => {
   const [loading, setLoading] = useState(false);
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState("");
 
   const [form] = Form.useForm();
   const router = useRouter();
@@ -38,15 +39,17 @@ const Signup = () => {
     return false;
   };
 
-  const handleSubmit = async (data:IState['userInfo']) => {
+  const handleSubmit = async (data: IState["userInfo"]) => {
     setLoading(true);
     data.phone = phoneNumber;
     delete data.confirmPassword;
 
     const res = await AuthRepository.createAccount(data);
 
-    if (res.message === "success") {
-      router.push("/auth/verify-email");
+    if (res.statusCode === 201) {
+      console.log(res.data.verificationCode)
+
+      router.push(links.VERIFYEMAIL);
       openNotification({
         type: "success",
         message: "Account created successfully!",

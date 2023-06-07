@@ -17,7 +17,8 @@ const ResendVerificationCode = () => {
 
     const res = await AuthRepository.resendVerificationCode(data);
 
-    if (res.message === "success") {
+    if (res.statusCode === 200) {
+      console.log(res.data.verificationCode)
       openNotification({
         type: "success",
         message: "Your verification code has been sent!",

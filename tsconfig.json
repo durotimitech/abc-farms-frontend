@@ -23,7 +23,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "components/visuals/Breadcrumb/MyBreadcrumb.tsx"  ],
+, "components/visuals/Breadcrumb/MyBreadcrumb.tsx", "utilities/constants.js"  ],
   "exclude": [
     "node_modules"
   ]

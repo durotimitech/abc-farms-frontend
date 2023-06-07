@@ -20,7 +20,7 @@ const NavigationMenu = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const userAccessLevel = useSelector((state) => state.auth.accessLevel);
-  const lastName = useSelector((state) => state.auth.lastName);
+  const firstName = useSelector((state) => state.auth.firstName);
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
 
   const menu = (
@@ -96,7 +96,7 @@ const NavigationMenu = () => {
                 className="ant-dropdown-link"
                 onClick={(e) => e.preventDefault()}
               >
-                <UserOutlined className="fa_2x" /> <b>Hi, {lastName}</b>
+                <UserOutlined className="fa_2x" /> <b>Hi, {firstName}</b>
                 <DownOutlined />
               </a>
             </Dropdown>
