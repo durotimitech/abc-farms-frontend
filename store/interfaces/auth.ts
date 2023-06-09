@@ -10,10 +10,16 @@ export interface Login {
   password: string;
 }
 
+export enum IRole {
+    USER = "USER",
+    ADMIN = "ADMIN",
+}
+
 export interface AuthData {
   isLoggedIn: boolean;
   token: string;
   firstName: string;
+  role: IRole
 }
 
 interface LoginRequestAction {

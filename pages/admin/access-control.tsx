@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import AccessControl from "../../components/partials/admin/AccessControl/AccessControl";
 import AdminLayout from "../../components/visuals/Layout/AdminLayout/AdminLayout";
 import Spinner from "../../components/visuals/Spin/Spin";
-import UserRepository from "../../repositories/UserRepository";
+import AdminRepository from "../../repositories/AdminRepository";
 import { accessLevels } from "../../utilities/constants";
 import withAuth from "../../components/hocs/RouteAuth";
 
@@ -12,7 +12,7 @@ const AccessControlPage = () => {
 
   const getAdmins = async () => {
     setLoading(true);
-    const res = await UserRepository.getAdmins();
+    const res = await AdminRepository.getAdmins();
     if (res.message === "success") setAdmins(res.data);
     setLoading(false);
   };

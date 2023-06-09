@@ -8,7 +8,7 @@ import storage from "redux-persist/lib/storage"; // defaults to localStorage for
 const persistConfig = {
   key: "abcstorage",
   storage,
-  whitelist: ["auth", "product", "cart", "wishlist"],
+  whitelist: ["auth", "cart", "wishlist"],
   blacklist: [],
 };
 

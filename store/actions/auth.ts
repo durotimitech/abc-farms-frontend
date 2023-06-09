@@ -5,33 +5,35 @@ import { getWishlist } from "./wishlist";
 import { links, localStorageVars } from "../../utilities/constants";
 import { _error } from "../../utilities/_error";
 import openNotification from "../../components/visuals/Notification";
-import { Dispatch } from 'redux'
+import { Dispatch } from "redux";
 import actionTypes from "../action-types/auth";
-import { Action, Login } from '../interfaces/auth'
+import { Action, Login } from "../interfaces/auth";
 
 // LOGIN
 export const login = (data: Login) => async (dispatch: Dispatch<Action>) => {
   try {
-    dispatch({ type: actionTypes.LOGIN_REQUEST, });
+    dispatch({ type: actionTypes.LOGIN_REQUEST });
 
     let res = await AuthRepository.login(data);
-    console.log(res.data)
+    console.log(res.data);
 
     if (res.statusCode === 200) {
       if (res.data.emailVerified) {
         openNotification({ type: "success", message: "Login Successful!" });
-        localStorage.setItem(localStorageVars.TOKEN, res.data.token);
-        router.push("/");
-        dispatch(
-          {
-            type: actionTypes.LOGIN_SUCCESS,
-            payload: {
-              isLoggedIn: true,
-              token: res.data.token,
-              firstName: res.data.firstName,
-            }
-          }
+        localStorage.setItem(
+          localStorageVars.TOKEN,
+          `Bearer ${res.data.token}`
         );
+        router.push("/");
+        dispatch({
+          type: actionTypes.LOGIN_SUCCESS,
+          payload: {
+            isLoggedIn: true,
+            token: res.data.token,
+            firstName: res.data.firstName,
+            role: res.data.role,
+          },
+        });
         dispatch(getCart() as any);
       } else {
         _error("Please verify your email!", "verifyEmail");
@@ -60,7 +62,7 @@ export const logout = () => async (dispatch: Dispatch<Action>) => {
     dispatch({
       type: actionTypes.LOGOUT_SUCCESS,
     });
-    
+
     openNotification({
       type: "success",
       message: "Logout successful!",

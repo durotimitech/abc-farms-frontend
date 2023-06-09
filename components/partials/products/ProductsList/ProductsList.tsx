@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ProductCard from "../ProductCard/ProductCard";
 import classes from "./ProductsList.module.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,8 +8,8 @@ import NoProducts from "../../../shared/EmptyContent/NoProducts/NoProducts";
 
 const ProductsList = () => {
   const dispatch = useDispatch();
-  const loading = useSelector((state) => state.product.loading);
-  const products = useSelector((state) => state.product.products);
+  const [loading, setLoading] = useState(false);
+  const [products, setProducts] = useState([]);
 
   const renderProductList =(): JSX.Element[]=>{
     return products &&

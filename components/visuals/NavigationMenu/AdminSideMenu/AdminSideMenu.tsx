@@ -12,13 +12,12 @@ import {
 import classes from "./AdminSideMenu.module.css";
 import Link from "next/link";
 import { links, localStorageVars } from "../../../../utilities/constants";
-import { useDispatch, useSelector } from "react-redux";
+import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../../store/actions/auth";
-import { accessLevels } from "../../../../utilities/constants";
 
 const AdminSideMenu = () => {
   const dispatch = useDispatch();
-  const accessLevel = useSelector((state) => state.auth.accessLevel);
+  const role = useSelector((state: RootStateOrAny) => state.auth.role);
   const [collapsed, setCollapsed] = useState(false);
   const [currentKey, setCurrentKey] = useState(
     localStorage.getItem(localStorageVars.CURRENTADMINSIDEMENUKEY) || "1"
@@ -60,13 +59,9 @@ const AdminSideMenu = () => {
         </Menu.Item>
 
         {/* Access Control */}
-        {accessLevel.includes(accessLevels) ? (
           <Menu.Item key="4" icon={<UsergroupAddOutlined />}>
             <Link href={links.ACCESSCONTROL}>Manage Access</Link>
           </Menu.Item>
-        ) : (
-          ""
-        )}
         {/* Logout */}
         <Menu.Item key="5" icon={<LogoutOutlined />}>
           <p onClick={() => dispatch(logout())}>Logout</p>

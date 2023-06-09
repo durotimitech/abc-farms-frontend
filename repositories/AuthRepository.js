@@ -75,13 +75,15 @@ class AuthRepository {
   async changePassword(data) {
     console.log("changePassword API called...");
     try {
-      let payload = await axios.patch(
-        `${process.env.NEXT_PUBLIC_API_USERS}/change-password`,
+      let payload = await axios.put(
+        `${process.env.NEXT_PUBLIC_API}/users/change-password`,
         data,
         {
           timeout: 8000,
           headers: {
-            Authorization: localStorage.getItem(localStorageVars.TOKEN),
+            Authorization: localStorage.getItem(
+              localStorageVars.TOKEN
+            ),
           },
         }
       );
@@ -95,9 +97,8 @@ class AuthRepository {
   async resetPassword(data) {
     console.log("resetPassword API called...");
     try {
-      let payload = await axios.patch(
-        `${process.env.NEXT_PUBLIC_API_USERS}/reset-password`,
-
+      let payload = await axios.post(
+        `${process.env.NEXT_PUBLIC_API}/users/reset-password`,
         data,
         {
           timeout: 8000,

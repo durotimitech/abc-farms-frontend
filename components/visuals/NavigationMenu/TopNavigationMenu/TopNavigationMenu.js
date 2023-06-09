@@ -15,11 +15,12 @@ import {
   ShoppingCartOutlined,
 } from "@ant-design/icons";
 import { accessLevels, links } from "../../../../utilities/constants";
+import { IRole } from "../../../../store/interfaces/auth";
 
 const NavigationMenu = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const userAccessLevel = useSelector((state) => state.auth.accessLevel);
+  const role = useSelector((state) => state.auth.role);
   const firstName = useSelector((state) => state.auth.firstName);
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
 
@@ -57,7 +58,7 @@ const NavigationMenu = () => {
       </Menu.Item>
 
       {/* Admin */}
-      <Menu.Item hidden={userAccessLevel < accessLevels.ADMIN} key="6">
+      <Menu.Item hidden={role !== IRole.ADMIN} key="6">
         <UserSwitchOutlined className={`${classes.dropdown_item}`} />
         <Link passHref href={links.ADMIN}>
           Admin

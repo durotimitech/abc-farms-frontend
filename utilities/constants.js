@@ -1,8 +1,3 @@
-export const accessLevels = {
-  USER: 1,
-  SALESMAN: 2,
-  ADMIN: 3,
-};
 
 export const links = {
   // Home

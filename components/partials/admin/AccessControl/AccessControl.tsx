@@ -1,6 +1,6 @@
 import { Button, Col, Form, Input, Modal, Row, Select, Table } from "antd";
 import React, { useState } from "react";
-import UserRepository from "../../../../repositories/UserRepository";
+import AdminRepository from "../../../../repositories/AdminRepository";
 import openNotification from "../../../visuals/Notification";
 const { Option } = Select;
 
@@ -42,7 +42,7 @@ const AccessControl:React.FC<IProps> = ({ admins }) => {
           accessLevel: role,
         };
 
-        const res = UserRepository.adminUpdateUser(data);
+        const res = AdminRepository.adminUpdateUser(data);
 
         if (res.message === "success") {
           openNotification({ type: "success", message: "Member added!" });
@@ -71,7 +71,7 @@ const AccessControl:React.FC<IProps> = ({ admins }) => {
                 email: record.email,
                 accessLevel: value,
               };
-              const res = UserRepository.adminUpdateUser(data);
+              const res = AdminRepository.adminUpdateUser(data);
 
               if (res.message === "success") {
                 openNotification({ type: "success", message: "Member added!" });

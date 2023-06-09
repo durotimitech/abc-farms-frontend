@@ -2,11 +2,11 @@ import axios from "axios";
 import { localStorageVars } from "../utilities/constants";
 import { _error } from "../utilities/_error";
 
-class UserRepository {
+class AdminRepository {
   async getUsers() {
     console.log("getUsers API called...");
     try {
-      let payload = await axios.get(process.env.NEXT_PUBLIC_API_USERS, {
+      let payload = await axios.get(`${process.env.NEXT_PUBLIC_API}/admin/users`, {
         headers: {
           Authorization: localStorage.getItem(localStorageVars.TOKEN),
         },
@@ -59,4 +59,4 @@ class UserRepository {
   }
 }
 
-export default new UserRepository();
+export default new AdminRepository();

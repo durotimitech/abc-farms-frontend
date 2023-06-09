@@ -16,7 +16,9 @@ const ResetPassword = () => {
     setLoading(true);
     const res = await AuthRepository.resetPassword(data);
 
-    if (res.message === "success") {
+    console.log(res.data.newPassword)
+
+    if (res.statusCode === 200) {
       openNotification({
         type: "success",
         message: "Your password has been sent to your mail!",

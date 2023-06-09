@@ -13,9 +13,11 @@ const ChangePassword = () => {
   const handleSubmit = async (data) => {
     setLoading(true);
 
+    delete data.confirmPassword;
+
     const res = await AuthRepository.changePassword(data);
 
-    if (res.message === "success") {
+    if (res.statusCode === 200) {
       openNotification({
         type: "success",
         message: "Your password has been changed!",
@@ -50,7 +52,7 @@ const ChangePassword = () => {
 
           {/* New Password */}
           <Form.Item
-            name="password"
+            name="newPassword"
             label="New Password"
             rules={[
               { required: true, message: "Please input a password!" },
@@ -78,7 +80,7 @@ const ChangePassword = () => {
               { required: true, message: "Passwords do not match!" },
               ({ getFieldValue }) => ({
                 validator(_, value) {
-                  if (!value || getFieldValue("password") === value) {
+                  if (!value || getFieldValue("newPassword") === value) {
                     return Promise.resolve();
                   }
                   return Promise.reject("Passwords do not match!");
@@ -92,7 +94,7 @@ const ChangePassword = () => {
           {/* Submit Btn */}
           <Form.Item>
             <Button className="btn" htmlType="submit" block>
-              Reset Password
+              Change Password
             </Button>
           </Form.Item>
         </Form>

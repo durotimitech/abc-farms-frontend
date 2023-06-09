@@ -3,23 +3,24 @@ import AdminDashboard from "../../components/partials/admin/AdminDashboard/Admin
 import { useSelector } from "react-redux";
 import Spinner from "../../components/visuals/Spin/Spin";
 import withAuth from "../../components/hocs/RouteAuth";
-import { accessLevels } from "../../utilities/constants";
-import UserRepository from "../../repositories/UserRepository";
+import AdminRepository from "../../repositories/AdminRepository";
 import AdminLayout from "../../components/visuals/Layout/AdminLayout/AdminLayout";
 import OrderRepository from "../../repositories/OrderRepository";
+import { IRole } from "../../store/interfaces/auth";
+import { Skeleton } from "antd";
 
 const AdminDashboardPage = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [userCount, setUsersCount] = useState(0);
   const [totalOrderCount, setTotalOrders] = useState(0);
-  const products = useSelector((state) => state.product.allProducts);
-  const productCount = useSelector((state) => state.product.count);
+  const [productCount, setProductCount] = useState(0);
+  const [products, setProducts] = useState([]);
 
   const getUsers = async () => {
-    const res = await UserRepository.getUsers();
+    const res = await AdminRepository.getUsers();
 
-    if (res.message === "success") {
-      setUsersCount(res.data.count);
+    if (res.statusCode === 200) {
+      setUsersCount(res.data.totalCount);
       setLoading(false);
     } else {
       setLoading(false);
@@ -29,7 +30,7 @@ const AdminDashboardPage = () => {
   const getOrders = async () => {
     const res = await OrderRepository.getAllOrders();
 
-    if (res.message === "success") {
+    if (res.statusCode === 200) {
       setTotalOrders(res.data.count);
       setLoading(false);
     } else {
@@ -47,7 +48,7 @@ const AdminDashboardPage = () => {
     <>
       <AdminLayout pageTitle={"Dashboard"}>
         {loading ? (
-          <Spinner />
+          <Skeleton active />
         ) : (
           <AdminDashboard
             products={products}
@@ -61,4 +62,4 @@ const AdminDashboardPage = () => {
   );
 };
 
-export default withAuth(AdminDashboardPage, [accessLevels.SALESMAN,accessLevels.ADMIN]);
+export default withAuth(AdminDashboardPage, [IRole.USER, IRole.ADMIN]);
