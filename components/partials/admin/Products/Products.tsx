@@ -4,12 +4,18 @@ import router from "next/router";
 import React from "react";
 import { links, localStorageVars } from "../../../../utilities/constants";
 import ProductsTable from "./ProductsTable/ProductsTable";
+import { IProduct } from "../../../../store/interfaces/product";
 
 interface IProps{
-  products:[],
+  products:IProduct[],
+  totalCount:number,
+  pageNumber:number,
+  pageSize:number,
+  setPageSize:(pageSize:number)=>void,
+  setPageNumber:(pageNumber:number)=>void
 }
 
-const Products:React.FC<IProps> = ({ products }) => {
+const Products:React.FC<IProps> = ({ products, totalCount,pageNumber, pageSize, setPageSize,setPageNumber }) => {
   const goToAddProductPage = () => {
     if (typeof window !== "undefined") {
       localStorage.setItem(localStorageVars.ADDEDITPRODUCT, "add");
@@ -33,7 +39,7 @@ const Products:React.FC<IProps> = ({ products }) => {
       <Divider />
       <br />
 
-      <ProductsTable products={products} />
+      <ProductsTable products={products} totalCount={totalCount} pageNumber={pageNumber} pageSize={pageSize} setPageNumber={setPageNumber} setPageSize={setPageSize} />
     </div>
   );
 };

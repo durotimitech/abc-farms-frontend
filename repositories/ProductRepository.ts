@@ -3,10 +3,12 @@ import { _error } from "../utilities/_error";
 import { localStorageVars } from "../utilities/constants";
 
 class ProductRepository {
-  async getProducts() {
+  async getProducts(pageNumber, pageSize) {
+    if (!pageNumber) pageNumber = 0;
+    if (!pageSize) pageSize = 10;
     console.log("getProducts API called...");
     try {
-      let payload = await axios.get(process.env.NEXT_PUBLIC_API_PRODUCTS, {
+      let payload = await axios.get(`${process.env.NEXT_PUBLIC_API}/products?pageNumber=${pageNumber}&pageSize=${pageSize}`, {
         timeout: 8000,
       });
       return payload.data;
@@ -33,9 +35,9 @@ class ProductRepository {
   async addProduct(data) {
     console.log("addProduct API called...");
     try {
-      let res = await axios.post(process.env.NEXT_PUBLIC_API_PRODUCTS, data, {
+      let res = await axios.post(`${process.env.NEXT_PUBLIC_API}/products`, data, {
         headers: {
-          timeout: 8000,
+          timeout: '8000',
           Authorization: localStorage.getItem(localStorageVars.TOKEN),
         },
       });
@@ -49,9 +51,26 @@ class ProductRepository {
   async editProduct(data) {
     console.log("editProduct API called...");
     try {
-      let res = await axios.patch(
-        `${process.env.NEXT_PUBLIC_API_PRODUCTS}/${data.productId}`,
+      let res = await axios.put(
+        `${process.env.NEXT_PUBLIC_API}/products/${data.id}`,
         data,
+        {
+          timeout: 8000,
+          headers: { Authorization: localStorage.getItem(localStorageVars.TOKEN) },
+        }
+      );
+      return res.data;
+    } catch (e) {
+      _error(e.message, "editProduct");
+      return e;
+    }
+  }
+
+  async deleteProduct(id:number) {
+    console.log("deleteProduct API called...");
+    try {
+      let res = await axios.delete(
+        `${process.env.NEXT_PUBLIC_API}/products/${id}`,
         {
           timeout: 8000,
           headers: { Authorization: localStorage.getItem(localStorageVars.TOKEN) },

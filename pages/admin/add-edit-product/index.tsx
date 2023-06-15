@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import AdminAddEditProduct from "../../../components/partials/admin/AddEditProduct/AddEditProduct";
 import withAuth from "../../../components/hocs/RouteAuth";
-import { accessLevels, localStorageVars } from "../../../utilities/constants";
+import {  localStorageVars } from "../../../utilities/constants";
 import { useSelector } from "react-redux";
 import Spinner from "../../../components/visuals/Spin/Spin";
 import AdminLayout from "../../../components/visuals/Layout/AdminLayout/AdminLayout";
+import { IProduct } from "../../../store/interfaces/product";
+import { IRole } from "../../../store/interfaces/auth";
+import { Skeleton } from "antd";
 
 const AdminAddEditProductPage = () => {
-  let loading = useSelector((state) => state.product.loading);
-  const products = useSelector((state) => state.product.products);
+  const [loading, setLoading] = useState(false);
 
   let action, product, route, heading;
 
@@ -31,13 +33,13 @@ const AdminAddEditProductPage = () => {
     <>
       <AdminLayout pageTitle={`${route} Product`}>
         {loading ? (
-          <Spinner />
+          <Skeleton active />
         ) : (
           <AdminAddEditProduct
-            products={products}
             action={action}
             product={product}
             heading={heading}
+            setLoading={setLoading}
           />
         )}
       </AdminLayout>
@@ -46,6 +48,5 @@ const AdminAddEditProductPage = () => {
 };
 
 export default withAuth(AdminAddEditProductPage, [
-  accessLevels.SALESMAN,
-  accessLevels.ADMIN,
+  IRole.ADMIN
 ]);

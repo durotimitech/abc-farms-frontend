@@ -1,23 +1,33 @@
 import { useRouter } from "next/router";
 import React from "react";
 import { Table, Popconfirm } from "antd";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import {
-  editProduct,
-} from "../../../../../store/actions/product";
-import { useDispatch } from "react-redux";
+import { EditOutlined, DeleteOutlined, RollbackOutlined } from "@ant-design/icons";
 import { links, localStorageVars } from "../../../../../utilities/constants";
 import AdminNoProducts from "../../../../shared/EmptyContent/AdminNoProducts/AdminNoProducts";
+import { IProduct } from "../../../../../store/interfaces/product";
+import ProductRepository from "../../../../../repositories/ProductRepository";
+import openNotification from "../../../../visuals/Notification";
 
-interface IProps{
-  products:[],
+interface IProps {
+  products: IProduct[];
+  totalCount: number;
+  pageNumber: number;
+  pageSize: number;
+  setPageSize: (pageSize: number) => void;
+  setPageNumber: (pageNumber: number) => void;
 }
 
-const ProductsTable:React.FC<IProps> = ({ products }) => {
+const ProductsTable: React.FC<IProps> = ({
+  products,
+  totalCount,
+  pageNumber,
+  pageSize,
+  setPageSize,
+  setPageNumber,
+}) => {
   const router = useRouter();
-  const dispatch = useDispatch();
 
-  const goToEditPage = (product) => {
+  const goToEditPage = (product: IProduct) => {
     if (typeof window !== "undefined") {
       localStorage.setItem(
         localStorageVars.PRODUCTDATA,
@@ -28,23 +38,42 @@ const ProductsTable:React.FC<IProps> = ({ products }) => {
     }
   };
 
+  const toggleDeleteProduct = async (product: IProduct) => {
+    const res = await ProductRepository.deleteProduct(product.id);
+
+    if (res.statusCode === 200) {
+      openNotification({
+        type: "success",
+        message: "Product edited successfully!",
+      });
+
+      router.reload();
+    } else {
+      openNotification({
+        type: "error",
+        message: "Something went wrong!",
+      });
+
+    }
+  };
+
   const columns = [
     {
       title: "Title",
-      dataIndex: "productTitle",
-      key: "productTitle",
+      dataIndex: "name",
+      key: "name",
     },
 
     {
       title: "Price",
-      dataIndex: "productPrice",
-      key: "productPrice",
+      dataIndex: "price",
+      key: "price",
       render: (price) => <span>₦{price}</span>,
     },
     {
       title: "Quantity",
-      dataIndex: "productQuantity",
-      key: "productQuantity",
+      dataIndex: "quantity",
+      key: "quantity",
     },
     {
       title: "Edit",
@@ -57,20 +86,26 @@ const ProductsTable:React.FC<IProps> = ({ products }) => {
     {
       title: "Delete",
       key: "delete",
-      render: (text, record) => {
-        return (
-          <Popconfirm
-            title="Are you sure to delete this product?"
-            onConfirm={() =>
-              dispatch(editProduct(products, record, "deleteProduct"))
-            }
-            okText="Yes"
-            cancelText="No"
-          >
-            <DeleteOutlined className="red" />
-          </Popconfirm>
-        );
-      },
+      render: (text:string, record:IProduct) => 
+      record.deleted ? (
+        <Popconfirm
+          title="Are you sure to restore this product?"
+          onConfirm={() => toggleDeleteProduct(record)}
+          okText="Yes"
+          cancelText="No"
+        >
+          <RollbackOutlined className="green" />
+        </Popconfirm>
+      ) : (
+        <Popconfirm
+          title="Are you sure to delete this product?"
+          onConfirm={() => toggleDeleteProduct(record)}
+          okText="Yes"
+          cancelText="No"
+        >
+          <DeleteOutlined className="red" />
+        </Popconfirm>
+      ),
     },
   ];
 
@@ -82,7 +117,16 @@ const ProductsTable:React.FC<IProps> = ({ products }) => {
         <Table
           dataSource={products}
           columns={columns}
-          rowKey={(record) => record.productId}
+          rowKey={(record: IProduct) => record.id}
+          pagination={{
+            total: totalCount,
+            current: pageNumber,
+            pageSize: pageSize,
+            onChange: (page, pageSize) => {
+              setPageNumber(page);
+              setPageSize(pageSize);
+            },
+          }}
         />
       )}
     </div>

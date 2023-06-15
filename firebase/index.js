@@ -2,7 +2,7 @@
 import firebase from "firebase/compat/app";
 // import { getStorage } from "firebase/storage";
 import "firebase/compat/storage";
-
+  
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,

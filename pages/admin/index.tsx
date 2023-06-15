@@ -8,19 +8,30 @@ import AdminLayout from "../../components/visuals/Layout/AdminLayout/AdminLayout
 import OrderRepository from "../../repositories/OrderRepository";
 import { IRole } from "../../store/interfaces/auth";
 import { Skeleton } from "antd";
+import ProductRepository from "../../repositories/ProductRepository";
 
 const AdminDashboardPage = () => {
   const [loading, setLoading] = useState(true);
   const [userCount, setUsersCount] = useState(0);
   const [totalOrderCount, setTotalOrders] = useState(0);
   const [productCount, setProductCount] = useState(0);
-  const [products, setProducts] = useState([]);
 
   const getUsers = async () => {
     const res = await AdminRepository.getUsers();
 
     if (res.statusCode === 200) {
       setUsersCount(res.data.totalCount);
+      setLoading(false);
+    } else {
+      setLoading(false);
+    }
+  };
+ 
+  const getProducts = async () => {
+    const res = await ProductRepository.getProducts(1, 0);
+
+    if (res.statusCode === 200) {
+      setProductCount(res.data.totalCount);
       setLoading(false);
     } else {
       setLoading(false);
@@ -42,6 +53,7 @@ const AdminDashboardPage = () => {
     setLoading(true);
     getUsers();
     getOrders();
+    getProducts()
   }, []);
 
   return (
@@ -51,7 +63,6 @@ const AdminDashboardPage = () => {
           <Skeleton active />
         ) : (
           <AdminDashboard
-            products={products}
             productCount={productCount}
             userCount={userCount}
             totalOrderCount={totalOrderCount}

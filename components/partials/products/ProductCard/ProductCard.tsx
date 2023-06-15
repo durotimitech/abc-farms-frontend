@@ -3,7 +3,6 @@ import Link from "next/link";
 import { Card, Image } from "antd";
 const { Meta } = Card;
 import { useDispatch } from "react-redux";
-import { getOneProduct } from "../../../../store/actions/product";
 import classes from "./ProductCard.module.css";
 
 interface IProps{

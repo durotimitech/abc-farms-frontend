@@ -15,7 +15,6 @@ export const login = (data: Login) => async (dispatch: Dispatch<Action>) => {
     dispatch({ type: actionTypes.LOGIN_REQUEST });
 
     let res = await AuthRepository.login(data);
-    console.log(res.data);
 
     if (res.statusCode === 200) {
       if (res.data.emailVerified) {

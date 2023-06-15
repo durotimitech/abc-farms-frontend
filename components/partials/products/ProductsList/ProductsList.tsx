@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import ProductCard from "../ProductCard/ProductCard";
 import classes from "./ProductsList.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "../../../../store/actions/product";
 import Spinner from "../../../visuals/Spin/Spin";
 import NoProducts from "../../../shared/EmptyContent/NoProducts/NoProducts";
 
@@ -27,7 +26,6 @@ const ProductsList = () => {
   }
 
   useEffect(() => {
-    dispatch(getProducts());
   }, []);
 
   return (

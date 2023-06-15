@@ -7,7 +7,14 @@
 - x Change pasword
 
 --- Admin
+
 --- Products
+- x Add product
+- x Edit product
+- x Delete product
+- View product
+- View all products
+
 --- Orders
 --- Carts
 --- Wishlist

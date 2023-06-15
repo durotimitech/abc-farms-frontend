@@ -1,9 +1,16 @@
 import LogRocket from "logrocket";
 import openNotification from "../components/visuals/Notification";
+import { logout } from "../store/actions/auth";
+import { store } from "../store/store";
 
 export const _error = (error, from) => {
+
   let message;
-  if (error === "Request failed with status code 401") {
+  if (error === "Request failed with status code 500") {
+    message = "Please log in";
+    store.dispatch(logout());
+
+  } else if (error === "Request failed with status code 401") {
     message = "Please log in";
   } else if (error === "Request failed with status code 403") {
     message = "You are not authorized to perform this action!";
