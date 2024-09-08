@@ -8,7 +8,10 @@ const ProductDetailsPage = () => {
   let loading = useSelector((state) => state.product.loading);
   const product = useSelector((state) => state.product.product);
   const products = useSelector((state) => state.product.products);
+
   const breadcrumbs = ["Home", `${product.productTitle}`];
+
+  
 
   return (
     <div className="container">

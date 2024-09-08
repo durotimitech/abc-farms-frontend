@@ -9,6 +9,13 @@ interface IProps{
   pageTitle:string
 }
 
+const customBreadcrumbStyle = {
+  backgroundColor: '#f0f2f5', // Set your desired background color
+  color:"#00FF00",
+  padding: '8px 16px', // Set padding as per your design
+  borderRadius: '4px', // Set border radius if needed
+};
+
 
 const MyBreadcrumb:React.FC<IProps> = ({ breadcrumbs, pageTitle }) => {
   const getLink = (route:string) => {
@@ -36,7 +43,7 @@ const MyBreadcrumb:React.FC<IProps> = ({ breadcrumbs, pageTitle }) => {
         <title>{pageTitle} | ABC Farms</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <Breadcrumb separator=">">
+      <Breadcrumb separator=">" style={customBreadcrumbStyle}>
         {breadcrumbs.map((crumb) => {
           return (
             <Breadcrumb.Item key={crumb}>
